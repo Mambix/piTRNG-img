@@ -1,8 +1,8 @@
 FROM 2018-10-09-raspbian-stretch-lite
 
-COPY /etc/network/interfaces /etc/network/interfaces
-COPY /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf
-COPY /etc/dhcpcd.conf /etc/dhcpcd.conf
-COPY /etc/dnsmasq.conf /etc/dnsmasq.conf
-COPY /etc/sysctl.conf /etc/sysctl.conf
-COPY /etc/default/hostapd /etc/default/hostapd
+COPY etc/network/interfaces /etc/network/interfaces
+COPY etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf
+COPY etc/dhcpcd.conf /etc/dhcpcd.conf
+COPY etc/dnsmasq.conf /etc/dnsmasq.conf
+COPY etc/sysctl.conf /etc/sysctl.conf
+COPY etc/default/hostapd /etc/default/hostapd
