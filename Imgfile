@@ -1,5 +1,8 @@
 FROM 2018-10-09-raspbian-stretch-lite
 
+INFLATE 128
+INSTALL mc dnsmasq hostapd
+
 COPY etc/network/interfaces /etc/network/interfaces
 COPY etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf
 COPY etc/dhcpcd.conf /etc/dhcpcd.conf
