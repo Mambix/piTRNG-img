@@ -1,7 +1,7 @@
 FROM 2018-10-09-raspbian-stretch-lite
 
 INFLATE 128
-INSTALL mc dnsmasq hostapd haveged
+APT mc git dnsmasq hostapd haveged
 
 SSH true
 
@@ -13,3 +13,17 @@ COPY etc/sysctl.conf /etc/sysctl.conf
 COPY etc/default/hostapd /etc/default/hostapd
 COPY etc/default/crda /etc/default/crda
 COPY etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+RUN mkdir -p /home/pi/GIT
+RUN cd /home/pi/GIT
+RUN git clone https://github.com/Mambix/piTRNG.git
+RUN cd piTRNG
+RUN git submodule init
+RUN git submodule update
+#RUN mkdir build
+#RUN cd build
+#RUN cmake ..
+#RUN make
+#RUN make install
+RUN g++ -Wall test/led.cpp GPIO/GPIOClass.cpp -o /usr/bin/testLED
+RUN g++ -Wall test/spi.cpp -o /usr/bin/testSPI
