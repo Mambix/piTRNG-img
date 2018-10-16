@@ -18,12 +18,12 @@ COPY etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.c
 RUN mkdir -p /home/pi/Source
 RUN cd /home/pi/source
 RUN wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.57.tar.gz
-tar zxvf bcm2835-1.57.tar.gz
-cd bcm2835-1.57
-./configure
-make
-sudo make check
-sudo make install
+RUN tar zxvf bcm2835-1.57.tar.gz
+RUN cd bcm2835-1.57
+RUN ./configure
+RUN make
+RUN sudo make check
+RUN sudo make install
 
 # Install piTRNG code
 RUN mkdir -p /home/pi/GIT
