@@ -1,7 +1,7 @@
 FROM 2018-10-09-raspbian-stretch-lite
 
 INFLATE 128
-APT mc git wget dnsmasq hostapd haveged
+APT mc git wget dnsmasq hostapd haveged python python-pip python-spidev ent dieharder
 
 SSH true
 
@@ -13,29 +13,10 @@ COPY etc/sysctl.conf /etc/sysctl.conf
 COPY etc/default/hostapd /etc/default/hostapd
 COPY etc/default/crda /etc/default/crda
 COPY etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
-
-# Install SPI library
-RUN mkdir -p /home/pi/Source
-RUN cd /home/pi/Source
-RUN wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.57.tar.gz
-RUN tar zxvf bcm2835-1.57.tar.gz
-RUN cd bcm2835-1.57
-RUN ./configure
-RUN make
-RUN sudo make check
-RUN sudo make install
+COPY boot/config.txt /boot/config.txt
 
 # Install piTRNG code
 RUN mkdir -p /home/pi/GIT
 RUN cd /home/pi/GIT
-RUN git clone https://github.com/Mambix/piTRNG.git
+RUN git clone -b python https://github.com/Mambix/piTRNG.git
 RUN cd piTRNG
-RUN git submodule init
-RUN git submodule update
-#RUN mkdir build
-#RUN cd build
-#RUN cmake ..
-#RUN make
-#RUN make install
-RUN g++ -Wall test/led.cpp GPIO/GPIOClass.cpp -o /usr/bin/testLED
-RUN g++ -Wall test/spi.cpp -o /usr/bin/testSPI
